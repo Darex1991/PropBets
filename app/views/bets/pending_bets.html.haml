@@ -1,0 +1,18 @@
+%h1 Pending bets
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th
+      %th
+      %th
+
+  %tbody
+    - @pending_bets.each do |bet|
+      %tr
+        %td= bet.name
+        %td= link_to 'Show', bet
+%br
+
+= link_to 'New Bet', new_bet_path

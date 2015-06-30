@@ -23,6 +23,16 @@ class BetsController < ApplicationController
   def bets_stock
     @bets_stock = Bet.where(:state => 'Waiting for challenger').where.not(:creator_user_id => current_user.id)
   end
+
+  # GET /bets/pending
+  def pending_bets
+    @pending_bets = Bet.where(:state => 'Bet in progress')
+  end
+
+  #Get /bets/history
+  def bets_history
+    @bets_history = Bet.where(:state => 'Finished')
+  end
   # GET /bets/new
   def new
     @bet = Bet.new

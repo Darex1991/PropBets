@@ -3,7 +3,10 @@ Rails.application.routes.draw do
 
   root 'bets#index'
   get '/mybets' => 'bets#my_bets', :as => :mybets
-  get '/betsstoke' => 'bets#bets_stock', :as => :stock
+  get '/betsstock' => 'bets#bets_stock', :as => :stock
+  get '/pendingbets' => 'bets#pending_bets', :as => :pending
+  get '/betshistory' => 'bets#bets_history', :as => history
+
   get '/auth/:provider/callback' => 'sessions#create'
   get '/signin' => 'sessions#new', :as => :signin
   get '/signout' => 'sessions#destroy', :as => :signout
