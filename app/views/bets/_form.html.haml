@@ -1,6 +1,5 @@
 = simple_form_for(@bet) do |f|
   = f.error_notification
-
   .form-inputs
     = f.input :name
     = f.input :description
@@ -8,6 +7,11 @@
     = f.input :finish_on
     = f.hidden_field :creator_user_id, value: current_user.id
     = f.hidden_field :state, value: 'Waiting for challenger'
+
+    = f.simple_fields_for :prize do |prize|
+      %h2 Prize
+      = prize.input :description
+      = prize.hidden_field :bet_id, value: @bet.id
 
   .form-actions
     = f.button :submit

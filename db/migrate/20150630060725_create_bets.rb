@@ -3,7 +3,6 @@ class CreateBets < ActiveRecord::Migration
     create_table :bets do |t|
       t.integer :creator_user_id
       t.integer :taker_user_id
-      t.integer :prize_id
       t.string :name
       t.text :description
       t.date :start_on

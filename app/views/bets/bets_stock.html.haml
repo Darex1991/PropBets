@@ -1,4 +1,4 @@
-%h1 Listing bets
+%h1 Bets Stock
 
 %table
   %thead
@@ -9,10 +9,12 @@
       %th
 
   %tbody
-    - @bets.each do |bet|
+    - @bets_stock.each do |bet|
       %tr
         %td= bet.name
         %td= link_to 'Show', bet
+        %td= link_to 'Takebet'
+
 %br
 
 = link_to 'New Bet', new_bet_path

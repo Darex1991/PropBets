@@ -13,9 +13,20 @@ class BetsController < ApplicationController
   def show
   end
 
+  # GET /bets/my
+  def my_bets
+    @my_bets_created = Bet.where(:creator_user_id => current_user.id)
+    @my_bets_taken = Bet.where(:taker_user_id => current_user.id)
+  end
+
+  # GET /bets/stock
+  def bets_stock
+    @bets_stock = Bet.where(:state => 'Waiting for challenger').where.not(:creator_user_id => current_user.id)
+  end
   # GET /bets/new
   def new
     @bet = Bet.new
+    @bet.prize = Prize.new
   end
 
   # GET /bets/1/edit
@@ -26,7 +37,6 @@ class BetsController < ApplicationController
   # POST /bets.json
   def create
     @bet = Bet.new(bet_params)
-
     respond_to do |format|
       if @bet.save
         format.html { redirect_to @bet, notice: 'Bet was successfully created.' }
@@ -70,6 +80,6 @@ class BetsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bet_params
-      params.require(:bet).permit(:name, :description, :start_on, :finish_on, :state, :creator_user_id)
+      params.require(:bet).permit(:name, :description, :start_on, :finish_on, :state, :creator_user_id, prize_attributes: [:description, :bet_id])
     end
 end
