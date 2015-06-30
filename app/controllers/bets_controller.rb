@@ -24,6 +24,12 @@ class BetsController < ApplicationController
     @bets_stock = Bet.where(:state => 'Waiting for challenger').where.not(:creator_user_id => current_user.id)
   end
 
+  # PATCH/PUT /bets/1
+  def accept_bets
+    @bet.update_attribute(:state, 'Bet in progress')
+    @bet.update_attribute(:taker_user_id, current_user.id)
+  end
+
   # GET /bets/pending
   def pending_bets
     @pending_bets = Bet.where(:state => 'Bet in progress')

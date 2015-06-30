@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   get '/mybets' => 'bets#my_bets', :as => :mybets
   get '/betsstock' => 'bets#bets_stock', :as => :stock
   get '/pendingbets' => 'bets#pending_bets', :as => :pending
-  get '/betshistory' => 'bets#bets_history', :as => history
+  get '/betshistory' => 'bets#bets_history', :as => :history
+  match '/betsstock' => 'bets#accept_bets', via: [:put]
 
   get '/auth/:provider/callback' => 'sessions#create'
   get '/signin' => 'sessions#new', :as => :signin
