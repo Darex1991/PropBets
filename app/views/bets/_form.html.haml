@@ -1,0 +1,13 @@
+= simple_form_for(@bet) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :description
+    = f.input :start_on
+    = f.input :finish_on
+    = f.hidden_field :creator_user_id, value: current_user.id
+    = f.hidden_field :state, value: 'Waiting for challenger'
+
+  .form-actions
+    = f.button :submit
