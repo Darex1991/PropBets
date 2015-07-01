@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :bets
+  resources :bets do
+    resources :acceptances, only: [:create]
+  end
+
   resource :my_bets, only: [:show]
   resource :bets_stock, only: [:show], controller: 'bets_stock'
   resource :pending_bets, only: [:show]

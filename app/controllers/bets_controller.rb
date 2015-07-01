@@ -12,13 +12,6 @@ class BetsController < AuthenticatedController
   def show
   end
 
-  # PUT /betsstock/1
-  def accept_bets
-    @bet.update_attribute(:state, 'Bet in progress')
-    @bet.update_attribute(:taker_user_id, current_user.id)
-    redirect_to @bet, notice: 'You accepted bet'
-  end
-
   # GET /bets/new
   def new
     @bet = Bet.new
