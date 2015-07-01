@@ -34,7 +34,7 @@ class BetsController < ApplicationController
   # GET /bets/pending
   def pending_bets
     @pending_bets = Bet.where(:state => 'Bet in progress')
-  endormat.html { redirect_to @bet, notice: 'Bet was successfully created.' }
+  end
 
   #Get /bets/history
   def bets_history
