@@ -1,5 +1,5 @@
 class BetsController < ApplicationController
-  before_action :set_bet, only: [:show, :edit, :update, :destroy]
+  before_action :set_bet, only: [:show, :edit, :update, :destroy, :accept_bets]
   before_action :authenticate_user!, except: [:index]
 
   # GET /bets
@@ -19,21 +19,22 @@ class BetsController < ApplicationController
     @my_bets_taken = Bet.where(:taker_user_id => current_user.id)
   end
 
-  # GET /bets/stock
+  # GET /betsstock
   def bets_stock
     @bets_stock = Bet.where(:state => 'Waiting for challenger').where.not(:creator_user_id => current_user.id)
   end
 
-  # PATCH/PUT /bets/1
+  # PUT /betsstock/1
   def accept_bets
     @bet.update_attribute(:state, 'Bet in progress')
     @bet.update_attribute(:taker_user_id, current_user.id)
+    redirect_to @bet, notice: 'You accepted bet'
   end
 
   # GET /bets/pending
   def pending_bets
     @pending_bets = Bet.where(:state => 'Bet in progress')
-  end
+  endormat.html { redirect_to @bet, notice: 'Bet was successfully created.' }
 
   #Get /bets/history
   def bets_history
