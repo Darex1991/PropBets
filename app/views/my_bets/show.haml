@@ -9,7 +9,7 @@
       %th
   Your Bets
   %tbody
-    - @my_bets_created.each do |bet|
+    - my_created_bets.each do |bet|
       %tr
         %td= bet.name
         %td= link_to 'Show', bet
@@ -28,7 +28,7 @@
       %th
   Bets you took
   %tbody
-    - @my_bets_taken.each do |bet|
+    - my_taken_bets.each do |bet|
       %tr
         %td= bet.name
         %td= link_to 'Show', bet

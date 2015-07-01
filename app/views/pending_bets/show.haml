@@ -1,4 +1,4 @@
-%h1 Selleo Bets History
+%h1 Pending bets
 
 %table
   %thead
@@ -9,7 +9,7 @@
       %th
 
   %tbody
-    - @bets_history.each do |bet|
+    - bets.each do |bet|
       %tr
         %td= bet.name
         %td= link_to 'Show', bet

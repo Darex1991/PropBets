@@ -18,6 +18,8 @@ gem 'omniauth-google-oauth2'
 gem 'pg'
 gem 'simple_form'
 gem 'thin'
+gem 'decent_exposure'
+
 group :development do
   gem 'better_errors'
   gem 'guard-bundler'
