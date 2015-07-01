@@ -1,5 +1,6 @@
 %h1 Listing bets
 
+
 %table
   %thead
     %tr
@@ -13,6 +14,9 @@
       %tr
         %td= bet.name
         %td= link_to 'Show', bet
+        %td= link_to 'Accept bet', accept_path(:id => bet.id),:method => :put, :data => { :action => 'accept_bets', :confirm => 'Are you sure?' } if bet.can_be_accepted_by?(current_user)
+
+
 %br
 
 = link_to 'New Bet', new_bet_path

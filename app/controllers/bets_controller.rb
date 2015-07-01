@@ -1,6 +1,6 @@
 class BetsController < ApplicationController
   before_action :set_bet, only: [:show, :edit, :update, :destroy, :accept_bets]
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!
 
   # GET /bets
   # GET /bets.json
@@ -15,13 +15,13 @@ class BetsController < ApplicationController
 
   # GET /bets/my
   def my_bets
-    @my_bets_created = Bet.where(:creator_user_id => current_user.id)
-    @my_bets_taken = Bet.where(:taker_user_id => current_user.id)
+    @my_bets_created = Bet.where(creator_user_id: current_user.id)
+    @my_bets_taken = Bet.where(taker_user_id: current_user.id)
   end
 
   # GET /betsstock
   def bets_stock
-    @bets_stock = Bet.where(:state => 'Waiting for challenger').where.not(:creator_user_id => current_user.id)
+    @bets_stock = Bet.where(state: 'Waiting for challenger').where.not(creator_user_id: current_user.id)
   end
 
   # PUT /betsstock/1
@@ -33,12 +33,12 @@ class BetsController < ApplicationController
 
   # GET /bets/pending
   def pending_bets
-    @pending_bets = Bet.where(:state => 'Bet in progress')
+    @pending_bets = Bet.where(state: 'Bet in progress')
   end
 
   #Get /bets/history
   def bets_history
-    @bets_history = Bet.where(:state => 'Finished')
+    @bets_history = Bet.where(state: 'Finished')
   end
   # GET /bets/new
   def new
