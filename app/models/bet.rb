@@ -1,6 +1,6 @@
 class Bet < ActiveRecord::Base
   validates :name, :description, presence: true
-  validate :finish_date_cannot_be_in_the_past
+  validate :finish_date_cannot_be_in_the_past, if: :finish_on_changed?
   validate :start_date_cannot_be_later_then_finish_date
   # validate :start_date_cannot_be_in_the_past see comment above method
   belongs_to :creator, foreign_key: :creator_user_id, class_name: User
@@ -25,7 +25,7 @@ class Bet < ActiveRecord::Base
   end
 
   def is_done?
-    winner_id.nil?
+    winner_id.nil? and taker_user_id != nil
   end
 
   def start_date_cannot_be_in_the_past

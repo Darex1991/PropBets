@@ -10,8 +10,6 @@ Rails.application.routes.draw do
 
   root 'bets#index'
 
-  #match '/betsstock/:id' => 'bets#accept_bets', via: [:put], :as => :accept
-
   get '/auth/:provider/callback' => 'sessions#create'
   get '/signin' => 'sessions#new', :as => :signin
   get '/signout' => 'sessions#destroy', :as => :signout

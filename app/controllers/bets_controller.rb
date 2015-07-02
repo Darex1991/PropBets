@@ -1,72 +1,35 @@
 class BetsController < AuthenticatedController
-  before_action :set_bet, only: [:show, :edit, :update, :destroy, :accept_bets]
-
-  # GET /bets
-  # GET /bets.json
-  def index
-    @bets = Bet.all
-  end
-
-  # GET /bets/1
-  # GET /bets/1.json
-  def show
-  end
-
-  # GET /bets/new
-  def new
-    @bet = Bet.new
-    @bet.prize = Prize.new
-  end
-
-  # GET /bets/1/edit
-  def edit
-  end
+  expose(:bet, attributes: :bet_params)
+  expose(:bets)
 
   # POST /bets
   # POST /bets.json
   def create
-    @bet = Bet.new(bet_params)
-    respond_to do |format|
-      if @bet.save
-        format.html { redirect_to @bet, notice: 'Bet was successfully created.' }
-        format.json { render :show, status: :created, location: @bet }
+      if bet.save
+         redirect_to bet, notice: 'Bet was successfully created.'
       else
-        format.html { render :new }
-        format.json { render json: @bet.errors, status: :unprocessable_entity }
+        render :new
       end
-    end
   end
 
   # PATCH/PUT /bets/1
   # PATCH/PUT /bets/1.json
   def update
-    respond_to do |format|
-      if @bet.update(bet_params)
-        format.html { redirect_to @bet, notice: 'Bet was successfully updated.' }
-        format.json { render :show, status: :ok, location: @bet }
+      if bet.save
+       redirect_to bet, notice: 'Bet was successfully updated.'
       else
-        format.html { render :edit }
-        format.json { render json: @bet.errors, status: :unprocessable_entity }
+        render :edit
       end
-    end
   end
 
   # DELETE /bets/1
   # DELETE /bets/1.json
   def destroy
-    @bet.destroy
-    respond_to do |format|
-      format.html { redirect_to bets_url, notice: 'Bet was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    bet.destroy
+       redirect_to bets_url, notice: 'Bet was successfully destroyed.'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_bet
-      @bet = Bet.find(params[:id])
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def bet_params
       params.require(:bet).permit(:name, :description, :start_on, :finish_on, :state, :creator_user_id, :winner_code, prize_attributes: [:description, :bet_id])
