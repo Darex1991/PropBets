@@ -1,4 +1,5 @@
 class BetsHistoryController < AuthenticatedController
-  expose(:bets){ Bet.where(state: 'Finished')}
+  expose(:bets){ Bet.finished}
 
+#SCOPE TO DO
 end

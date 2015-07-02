@@ -14,7 +14,8 @@
       %tr
         %td= bet.name
         %td= link_to 'Show', bet
-        %td= link_to 'Accept bet', bet_acceptances_path(bet),method: :post, data: {confirm: 'Are you sure?' } if bet.can_be_accepted_by?(current_user)
+        - if bet.can_be_accepted_by?(current_user)
+          %td= link_to 'Accept bet', bet_acceptances_path(bet),method: :post, data: {confirm: 'Are you sure?' }
 
 
 %br

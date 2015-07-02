@@ -16,8 +16,9 @@
         -if bet.is_done?
           %td= link_to 'Win' , bet_path(bet, bet: { winner_code: 'creator'}), method: :put, data: {confirm: 'Are you sure' }
           %td= link_to 'Lose', bet_path(bet, bet: { winner_code: 'taker'}), method: :put, data: {confirm: 'Are you sure' }
-        %td= link_to 'Edit', edit_bet_path(bet) if bet.is_protected?
-        %td= link_to 'Destroy', bet, method: :delete, data: { confirm: 'Are you sure?' } if bet.is_protected?
+        -unless bet.is_taken?
+          %td= link_to 'Edit', edit_bet_path(bet)
+          %td= link_to 'Destroy', bet, method: :delete, data: { confirm: 'Are you sure?' }
   %br
 %table
   %thead
