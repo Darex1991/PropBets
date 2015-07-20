@@ -1,7 +1,6 @@
 <%# add navigation links to this file %>
 <% if user_signed_in? %>
-  <li>Signed as <%= current_user.name %></li>
-  <li><%= link_to 'Sign out', signout_path %></li>
+   <p class="navbar-brand">Signed as <%= current_user.name %> <%= link_to 'Sign out', signout_path %></p>
 <% else %>
-  <li><%= link_to 'Sign in', signin_path %></li>
+  <%= link_to 'Sign in', signin_path %>
 <% end %>

@@ -9,6 +9,9 @@ class Bet < ActiveRecord::Base
   belongs_to :winner, foreign_key: :winner_id, class_name: User
   has_one :prize, dependent: :destroy
 
+  delegate :image, :name, to: :taker, allow_nil: true, prefix: true
+
+
   accepts_nested_attributes_for :prize
 
   attr_accessor :winner_code
@@ -28,7 +31,7 @@ class Bet < ActiveRecord::Base
   end
 
   def is_done?
-    winner_id && !taker_user_id
+    !winner_id && taker_user_id
   end
 
   def can_be_accepted_by?(user)

@@ -4,6 +4,24 @@
   %b Name:
   = bet.name
 
-= link_to 'Edit', edit_bet_path(bet)
-\|
-= link_to 'Back', bets_path
+%p
+  %b Description:
+  = bet.description
+
+%p
+  %b Between
+  = bet.creator.name
+  and
+  = bet.is_taken? ? bet.taker_name : 'still waiting for someone brave!'
+%p
+  %b Started on
+  = bet.start_on
+  %b Finished on
+  = bet.finish_on
+
+%p
+  %b Prize
+  = bet.prize.description
+= link_to 'Edit', edit_bet_path(bet), class: 'btn btn-default' if !bet.winner_id
+
+= link_to 'Back', bets_path, class: 'btn btn-default'
