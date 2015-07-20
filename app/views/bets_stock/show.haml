@@ -1,20 +1,26 @@
-%h1 Bets Stock
-
-%table
-  %thead
-    %tr
-      %th Name
-      %th
-      %th
-      %th
-
-  %tbody
-    - bets.each do |bet|
+.containter
+  %h1
+    Bets List
+    .pull-left
+      = button_to 'New Bet', new_bet_path, method: :get, class: 'btn btn-primary'
+.containter
+  %table.table.text-center
+    %thead
       %tr
-        %td= bet.name
-        %td= link_to 'Show', bet
-        %td= link_to 'Accept bet', bet_acceptances_path(bet),method: :post, data: {confirm: 'Are you sure?' }
+        %th Name
+        %th Creator
+        %th Prize
+        %th
 
-%br
-
-= link_to 'New Bet', new_bet_path
+    %tbody
+      - bets.each do |bet|
+        %tr
+          %td= bet.name
+          %td
+            = bet.creator.name
+            = image_tag(bet.creator.image, class: 'img-circle')
+          %td= bet.prize.description
+          %td
+            = link_to 'Show details', bet, class: 'btn btn-info'
+            - if bet.can_be_accepted_by?(current_user)
+              = link_to 'Accept bet', bet_acceptances_path(bet),method: :post, data: {confirm: 'Are you sure?' },class: 'btn btn-success'

@@ -20,7 +20,6 @@
           %td
             = bet.creator.name
             = image_tag(bet.creator.image, class: 'img-circle')
-            -   
           %td
             - if bet.is_taken?
               = bet.taker_name

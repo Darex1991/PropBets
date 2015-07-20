@@ -1,5 +1,3 @@
-%p#notice= notice
-
 %p
   %b Name:
   = bet.name
@@ -12,7 +10,7 @@
   %b Between
   = bet.creator.name
   and
-  = bet.is_taken? ? bet.taker_name : 'still waiting for someone brave!'
+  = bet.is_taken? ? bet.taker_name : 'still waiting for challenger'
 %p
   %b Started on
   = bet.start_on
