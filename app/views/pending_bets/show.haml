@@ -1,18 +1,32 @@
-%h1 Pending bets
-
-%table
-  %thead
-    %tr
-      %th Name
-      %th
-      %th
-      %th
-
-  %tbody
-    - bets.each do |bet|
+.containter
+  %h1
+    Pending Bets
+    .pull-left
+      = button_to 'New Bet', new_bet_path, method: :get, class: 'btn btn-primary'
+.containter
+  %table.table.text-center
+    %thead
       %tr
-        %td= bet.name
-        %td= link_to 'Show', bet
-%br
+        %th Name
+        %th Creator
+        %th Taker
+        %th Prize
+        %th Actions
 
-= link_to 'New Bet', new_bet_path
+    %tbody
+      - bets.each do |bet|
+        %tr
+          %td= bet.name
+          %td
+            = bet.creator.name
+            = image_tag(bet.creator.image, class: 'img-circle')
+          %td
+            - if bet.is_taken?
+              = bet.taker_name
+              = image_tag(bet.taker.image, class: 'img-circle')
+            - else
+              Nobody
+              = image_tag("help.png", class: 'img-cirlce')
+          %td= bet.prize.description
+          %td
+            = link_to 'Show details', bet, class: 'btn btn-info'

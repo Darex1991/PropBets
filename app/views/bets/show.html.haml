@@ -20,6 +20,6 @@
 %p
   %b Prize
   = bet.prize.description
-= link_to 'Edit', edit_bet_path(bet), class: 'btn btn-default' if !bet.winner_id
+= link_to 'Edit', edit_bet_path(bet), class: 'btn btn-default' if !bet.taker_user_id
 
 = link_to 'Back', bets_path, class: 'btn btn-default'
