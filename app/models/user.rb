@@ -1,14 +1,14 @@
 class User < ActiveRecord::Base
   has_many :bets
 
-  #
-  # validates :email,
-  #           presence: true,
-  #           uniqueness: true,
-  #           format: {
-  #               message: 'domain must be selleo.com',
-  #               with: /\A[\w+-.]+@selleo.com\z/i
-  #           }
+
+  validates :email,
+            presence: true,
+            uniqueness: true,
+            format: {
+                message: 'domain must be selleo.com',
+                with: /\A[\w+-.]+@selleo.com\z/i
+            }
 
   def self.create_with_omniauth(auth)
     create! do |user|
