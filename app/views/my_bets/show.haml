@@ -1,37 +1,45 @@
-%h1 My bets
-
-%table
-  %thead
-    %tr
-      %th Name
-      %th
-      %th
-      %th
-  Your Bets
-  %tbody
-    - my_created_bets.each do |bet|
+.containter
+  %h1
+    My Bets
+    .pull-left
+      = button_to 'New Bet', new_bet_path, method: :get, class: 'btn btn-primary'
+%h3 Bets you created
+.containter
+  %table.table.text-center
+    %thead
       %tr
-        %td= bet.name
-        %td= link_to 'Show', bet
-        -if bet.is_done?
-          %td= link_to 'Win' , bet_path(bet, bet: { winner_code: 'creator'}), method: :put, data: {confirm: 'Are you sure' }
-          %td= link_to 'Lose', bet_path(bet, bet: { winner_code: 'taker'}), method: :put, data: {confirm: 'Are you sure' }
-        -unless bet.is_taken?
-          %td= link_to 'Edit', edit_bet_path(bet)
-          %td= link_to 'Destroy', bet, method: :delete, data: { confirm: 'Are you sure?' }
-  %br
-%table
-  %thead
-    %tr
-      %th Name
-      %th
-      %th
-      %th
-  Bets you took
-  %tbody
-    - my_taken_bets.each do |bet|
-      %tr
-        %td= bet.name
-        %td= link_to 'Show', bet
+        %th Name
+        %th State
+        %th Actions
+    %tbody
+      - my_created_bets.each do |bet|
+        %tr
+          %td= bet.name
+          %td= bet.state
+          %td
+            = link_to 'Show', bet, class: 'btn btn-info'
+            -if bet.is_done?
+              = link_to 'Win' , bet_path(bet, bet: { winner_code: 'creator'}), method: :put, data: {confirm: 'Are you sure' }, class: 'btn btn-success'
+              = link_to 'Lose', bet_path(bet, bet: { winner_code: 'taker'}), method: :put, data: {confirm: 'Are you sure' }, class: 'btn btn-danger'
+            -unless bet.is_taken?
+              = link_to 'Edit', edit_bet_path(bet), class: 'btn btn-default'
+              = link_to 'Destroy', bet, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
 
-= link_to 'New Bet', new_bet_path
+%h3 Bets you took
+.containter
+  %table.table.text-center
+    %thead
+      %tr
+        %th Name
+        %th Against
+        %th State
+        %th Actions
+    %tbody
+      - my_taken_bets.each do |bet|
+        %tr
+          %td= bet.name
+          %td
+            = bet.creator.name
+            = image_tag(bet.creator.image, class: 'img-circle')
+          %td= bet.state
+          %td= link_to 'Show', bet, class: 'btn btn-info'
